@@ -1,0 +1,27 @@
+1. _____________________________________________
+npm start
+    Starts the development server.
+
+  npm run build
+    Bundles the app into static files for production.
+
+  npm test
+    Starts the test runner.
+
+  npm run eject
+    Removes this tool and copies build dependencies, configuration files
+    and scripts into the app directory. If you do this, you can’t go back!
+
+2. _____________________________________________
+(command left-click) or (ctrl left-click)
+=> can quickly analize the code by looking the source code of language
+(command option f) 
+=> select the same name variables
+
+3. _____________________________________________
+  1. npm install node-sass
+  2. npm run eject
+  3. rm -rf .git
+  4. npm run eject  => odkryje wszystkie webpack configi do projektu
+    +> takze i webpack.config.js ktory bedzie mozna nastroic
+  5 npm start
