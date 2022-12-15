@@ -1,3 +1,6 @@
+0. _____________________________________________
+  1. npx create-react-app
+
 1. _____________________________________________
 npm start
     Starts the development server.
@@ -25,3 +28,7 @@ npm start
   4. npm run eject  => odkryje wszystkie webpack configi do projektu
     +> takze i webpack.config.js ktory bedzie mozna nastroic
   5 npm start
+
+4. _____________________________________________
+  1. npm install sass
+  2. 
