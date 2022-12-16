@@ -1,34 +1,46 @@
 import { useState } from "react";
 
-const PizzaBlock = ({ title, price }) => {
-  const [pizzaCount, setPizzaCount] = useState(0);
-
-  const addBtn = () => {
-    setPizzaCount(pizzaCount + 1);
-  };
+const PizzaBlock = ({ title, price, imageUrl, sizes, types }) => {
+  const [activeType, setActType] = useState(0);
+  const [activeSize, setActSize] = useState(0);
 
   return (
     <div className="pizza-block">
-      <img
-        className="pizza-block__image"
-        src="https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/b750f576-4a83-48e6-a283-5a8efb68c35d.jpg"
-        alt="Pizza"
-      />
+      <img className="pizza-block__image" src={imageUrl} alt="Pizza" />
       <h4 className="pizza-block__title">{title}</h4>
       <div className="pizza-block__selector">
         <ul>
-          <li className="active">тонкое</li>
-          <li>традиционное</li>
+          {types.map((elem, index) => {
+            return (
+              <li
+                onClick={() => {
+                  setActType(index);
+                }}
+                className={activeType == index ? "active" : ""}
+              >
+                {elem ? "Traditional" : "Thin"}
+              </li>
+            );
+          })}
         </ul>
         <ul>
-          <li className="active">26 см.</li>
-          <li>30 см.</li>
-          <li>40 см.</li>
+          {sizes.map((elem, index) => {
+            return (
+              <li
+                onClick={() => {
+                  setActSize(index);
+                }}
+                className={activeSize == index ? "active" : ""}
+              >
+                {elem} cm
+              </li>
+            );
+          })}
         </ul>
       </div>
       <div className="pizza-block__bottom">
-        <div className="pizza-block__price">от {price} ₽</div>
-        <button onClick={addBtn} className="button button--outline button--add">
+        <div className="pizza-block__price">from {price} €</div>
+        <button className="button button--outline button--add">
           <svg
             width="12"
             height="12"
@@ -43,8 +55,8 @@ const PizzaBlock = ({ title, price }) => {
               data-darkreader-inline-fill=""
             ></path>
           </svg>
-          <span>Добавить</span>
-          <i>{pizzaCount}</i>
+          <span>Add</span>
+          <i>0</i>
         </button>
       </div>
     </div>

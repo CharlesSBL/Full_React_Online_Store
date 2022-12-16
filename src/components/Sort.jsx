@@ -16,14 +16,14 @@ function Sort() {
             data-darkreader-inline-fill=""
           ></path>
         </svg>
-        <b>Сортировка по:</b>
-        <span>популярности</span>
+        <b>Sorting by:</b>
+        <span>popularity</span>
       </div>
       <div className="sort__popup">
         <ul>
-          <li className="active">популярности</li>
-          <li>цене</li>
-          <li>алфавиту</li>
+          <li className="active">popularity</li>
+          <li>Price</li>
+          <li>Alphabet</li>
         </ul>
       </div>
     </div>

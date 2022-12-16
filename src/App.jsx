@@ -4,6 +4,8 @@ import Header from "./components/Header";
 import Sort from "./components/Sort";
 import PizzaBlock from "./components/PizzaBlock";
 
+import pizzaDB from "./assets/pizzaDB.json";
+
 function Pizza() {}
 
 function App() {
@@ -16,10 +18,17 @@ function App() {
             <Categories />
             <Sort />
           </div>
-          <h2 className="content__title">Все пиццы</h2>
+          <h2 className="content__title">All pizzas</h2>
           <div className="content__items">
-            <PizzaBlock title="Mexicano" price={500} />
-            <PizzaBlock title="Bunny" price={444} />
+            {pizzaDB.map((elem, index) => {
+              return (
+                <PizzaBlock
+                  // title={elem.title}
+                  // price={elem.price}
+                  {...elem}
+                />
+              );
+            })}
           </div>
         </div>
       </div>
