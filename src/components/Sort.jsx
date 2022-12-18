@@ -1,4 +1,17 @@
+import { useState } from "react";
+
 function Sort() {
+  const [popUp, setPopUp] = useState(false);
+  const arrName = ["Popularity", "Price", "Alphabet"];
+
+  const [activeType, setActiveType] = useState(0);
+  const sortName = arrName[activeType];
+
+  const listSeleted = (index) => {
+    setActiveType(index);
+    setPopUp(!popUp);
+  };
+
   return (
     <div className="sort">
       <div className="sort__label">
@@ -17,15 +30,25 @@ function Sort() {
           ></path>
         </svg>
         <b>Sorting by:</b>
-        <span>popularity</span>
+        <span onClick={() => setPopUp(!popUp)}>{sortName}</span>
       </div>
-      <div className="sort__popup">
-        <ul>
-          <li className="active">popularity</li>
-          <li>Price</li>
-          <li>Alphabet</li>
-        </ul>
-      </div>
+      {popUp && (
+        <div className="sort__popup">
+          <ul>
+            {arrName.map((elem, index) => {
+              return (
+                <li
+                  key={index}
+                  onClick={() => listSeleted(index)}
+                  className={activeType == index ? "active" : ""}
+                >
+                  {elem}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }

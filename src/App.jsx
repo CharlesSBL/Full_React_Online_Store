@@ -23,6 +23,7 @@ function App() {
             {pizzaDB.map((elem, index) => {
               return (
                 <PizzaBlock
+                  key={elem.id}
                   // title={elem.title}
                   // price={elem.price}
                   {...elem}

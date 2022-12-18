@@ -22,7 +22,7 @@ function Categories() {
     <div className="categories">
       <ul>
         {categories.map((elem, index) => (
-          <ListItem elem={elem} index={index} />
+          <ListItem key={index} elem={elem} index={index} />
         ))}
       </ul>
     </div>

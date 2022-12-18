@@ -14,6 +14,7 @@ const PizzaBlock = ({ title, price, imageUrl, sizes, types }) => {
           {types.map((elem, index) => {
             return (
               <li
+                key={elem}
                 onClick={() => {
                   setActType(index);
                 }}
@@ -28,6 +29,7 @@ const PizzaBlock = ({ title, price, imageUrl, sizes, types }) => {
           {sizes.map((elem, index) => {
             return (
               <li
+                key={elem}
                 onClick={() => {
                   setActSize(index);
                 }}
