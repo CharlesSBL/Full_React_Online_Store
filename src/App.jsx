@@ -5,10 +5,23 @@ import Sort from "./components/Sort";
 import PizzaBlock from "./components/PizzaBlock";
 
 import pizzaDB from "./assets/pizzaDB.json";
+import { useState } from "react";
+import { useEffect } from "react";
 
 function Pizza() {}
 
 function App() {
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    const URL = "https://639f1d625eb8889197f4b7be.mockapi.io/items";
+    fetch(URL)
+      .then((data) => data.json())
+      .then((dataJson) => setItems(dataJson));
+  }, []);
+  // pierwszy render (didMount)
+  //sa 3 sostajanija, render, zmiana, usuniecie
+
   return (
     <div className="wrapper">
       <Header />
@@ -20,7 +33,7 @@ function App() {
           </div>
           <h2 className="content__title">All pizzas</h2>
           <div className="content__items">
-            {pizzaDB.map((elem, index) => {
+            {items.map((elem, index) => {
               return (
                 <PizzaBlock
                   key={elem.id}
