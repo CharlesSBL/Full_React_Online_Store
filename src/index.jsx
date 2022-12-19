@@ -6,10 +6,6 @@ import { Routes, Route, BrowserRouter } from "react-router-dom";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
-    <Routes>
-      <Route>
-        <App />
-      </Route>
-    </Routes>
+    <App></App>
   </BrowserRouter>
 );
