@@ -47,4 +47,6 @@ npm start
 
 4. _____________________________________________
   1. npm install sass
-  2. 
+  2. npm install react-content-loader
+  3. npm i react-router-dom
+  4. (rfc) generuje kod react dla elementu
