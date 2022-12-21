@@ -1,20 +1,14 @@
 import { useState } from "react";
 
-function Categories() {
-  const [indexOn, setIndexOn] = useState(0);
-
+function Categories({ value, onClickCategory }) {
   const categories = ["All", "Meat", "Vegetarian", "Grill", "Spicy", "Closed"];
 
-  const onCategory = (x) => {
-    setIndexOn(x);
-  };
-
-  const ListItem = ({ elem, index }) => (
+  const ListItem = ({ categoryName, index }) => (
     <li
-      onClick={() => onCategory(index)}
-      className={indexOn == index ? "active" : ""}
+      onClick={() => onClickCategory(index)}
+      className={value == index ? "active" : ""}
     >
-      {elem}
+      {categoryName}
     </li>
   );
 
@@ -22,7 +16,7 @@ function Categories() {
     <div className="categories">
       <ul>
         {categories.map((elem, index) => (
-          <ListItem key={index} elem={elem} index={index} />
+          <ListItem key={index} categoryName={elem} index={index} />
         ))}
       </ul>
     </div>
