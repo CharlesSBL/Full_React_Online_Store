@@ -3,12 +3,12 @@ import { useState } from "react";
 function Sort({ value, onClickSort }) {
   const [popUp, setPopUp] = useState(false);
   const arrName = [
-    { name: "Popularity (DESC)", sort: "rating" },
-    { name: "Popularity (ASC)", sort: "-rating" },
-    { name: "Price (DESC)", sort: "price" },
-    { name: "Price (ASC)", sort: "-price" },
-    { name: "Alphabet (DESC)", sort: "title" },
-    { name: "Alphabet (ASC)", sort: "-title" },
+    { name: "Popularity ↓", sort: "rating" },
+    { name: "Popularity ↑", sort: "-rating" },
+    { name: "Price ↓", sort: "price" },
+    { name: "Price ↑", sort: "-price" },
+    { name: "Alphabet ↓", sort: "title" },
+    { name: "Alphabet ↑", sort: "-title" },
   ];
 
   const listSeleted = (obj) => {
