@@ -7,8 +7,11 @@ import Pagination from "../components/Pagination";
 
 import { useState } from "react";
 import { useEffect } from "react";
+import { SearchContext } from "../App";
 
-function Home({ searchValue, setSearchValue }) {
+function Home() {
+  const { searchValue } = React.useContext(SearchContext);
+
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
