@@ -7,6 +7,7 @@ import NotFound from "./pages/NotFound";
 import Cart from "./pages/Cart";
 
 import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
 
 export const SearchContext = React.createContext();
 
@@ -15,7 +16,7 @@ function App() {
 
   return (
     <div className="wrapper">
-      <SearchContext.Provider value={{ searchValue, setSearchValue }}>
+      <Provider value={{ searchValue, setSearchValue }}>
         <Header />
         <div className="content">
           <Routes>
@@ -24,7 +25,7 @@ function App() {
             <Route path="*" element={<NotFound />}></Route>
           </Routes>
         </div>
-      </SearchContext.Provider>
+      </Provider>
     </div>
   );
 }

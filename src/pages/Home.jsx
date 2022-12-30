@@ -9,7 +9,11 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { SearchContext } from "../App";
 
+import { useSelector } from "react-redux";
+
 function Home() {
+  const categoryId2 = useSelector((state) => state.filter);
+
   const { searchValue } = React.useContext(SearchContext);
 
   const [items, setItems] = useState([]);
