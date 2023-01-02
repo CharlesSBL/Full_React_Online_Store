@@ -9,21 +9,22 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { SearchContext } from "../App";
 
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setCategoryId } from "../redux/slices/filterSlice";
 
 function Home() {
+  const dispatch = useDispatch();
   const categoryId = useSelector((state) => state.filter.categoryId);
+  const onClickCategory = (id) => {
+    dispatch(setCategoryId(id));
+  };
+
+  const sortType = useSelector((state) => state.filter.sortName.sort);
 
   const { searchValue } = React.useContext(SearchContext);
 
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
-  // const [categoryId, setCategoryId] = useState(0);
-  const [sortType, setSortType] = useState({
-    name: "Popularity",
-    sort: "rating",
-  });
 
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -31,8 +32,8 @@ function Home() {
     setIsLoading(true);
 
     const category = categoryId > 0 ? `category=${categoryId}` : "";
-    const sortBy = sortType.sort.replace("-", "");
-    const order = sortType.sort.includes("-") ? "asc" : "desc";
+    const sortBy = sortType.replace("-", "");
+    const order = sortType.includes("-") ? "asc" : "desc";
     const search = searchValue ? `&search=${searchValue}` : "desc";
 
     const URL = `https://639f1d625eb8889197f4b7be.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`;
@@ -63,9 +64,9 @@ function Home() {
       <div className="content__top">
         <Categories
           value={categoryId}
-          onClickCategory={(i) => setCategoryId(i)}
+          onClickCategory={(i) => onClickCategory(i)}
         />
-        <Sort value={sortType} onClickSort={(i) => setSortType(i)} />
+        <Sort />
       </div>
 
       <div className="content__title_div">

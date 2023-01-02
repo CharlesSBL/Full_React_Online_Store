@@ -1,6 +1,12 @@
 import { useState } from "react";
 
-function Sort({ value, onClickSort }) {
+import { useSelector, useDispatch } from "react-redux";
+import { setSort } from "../redux/slices/filterSlice";
+
+function Sort() {
+  const dispatch = useDispatch();
+  const sort = useSelector((state) => state.filter.sortName);
+
   const [popUp, setPopUp] = useState(false);
   const arrName = [
     { name: "Popularity ↓", sort: "rating" },
@@ -12,7 +18,7 @@ function Sort({ value, onClickSort }) {
   ];
 
   const listSeleted = (obj) => {
-    onClickSort(obj);
+    dispatch(setSort(obj));
     setPopUp(!popUp);
   };
 
@@ -34,7 +40,7 @@ function Sort({ value, onClickSort }) {
           ></path>
         </svg>
         <b>Sorting by:</b>
-        <span onClick={() => setPopUp(!popUp)}>{value.name}</span>
+        <span onClick={() => setPopUp(!popUp)}>{sort.name}</span>
       </div>
       {popUp && (
         <div className="sort__popup">
@@ -44,7 +50,7 @@ function Sort({ value, onClickSort }) {
                 <li
                   key={index}
                   onClick={() => listSeleted(obj)}
-                  className={value.sort == obj.sort ? "active" : ""}
+                  className={sort.sort == obj.sort ? "active" : ""}
                 >
                   {obj.name}
                 </li>

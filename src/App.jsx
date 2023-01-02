@@ -16,7 +16,7 @@ function App() {
 
   return (
     <div className="wrapper">
-      <Provider value={{ searchValue, setSearchValue }}>
+      <SearchContext.Provider value={{ searchValue, setSearchValue }}>
         <Header />
         <div className="content">
           <Routes>
@@ -25,7 +25,7 @@ function App() {
             <Route path="*" element={<NotFound />}></Route>
           </Routes>
         </div>
-      </Provider>
+      </SearchContext.Provider>
     </div>
   );
 }
