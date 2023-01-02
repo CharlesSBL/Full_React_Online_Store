@@ -1,15 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  categoryId: 55,
-  sort: {
+  categoryId: 0,
+  sortName: {
     name: "Popularity",
     sort: "rating",
   },
 };
 
-export const filterSlice = createSlice({
-  name: "counter",
+const filterSlice = createSlice({
+  name: "filters",
   initialState,
   reducers: {
     setCategoryId(state, action) {
@@ -19,8 +19,6 @@ export const filterSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { setCategoryId } = counterSlice.actions;
+export const { setCategoryId } = filterSlice.actions;
 
-export default counterSlice.reducer;
-
-// 12:45
+export default filterSlice.reducer;

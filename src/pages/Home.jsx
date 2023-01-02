@@ -12,14 +12,14 @@ import { SearchContext } from "../App";
 import { useSelector } from "react-redux";
 
 function Home() {
-  const categoryId2 = useSelector((state) => state.filter);
+  const categoryId = useSelector((state) => state.filter.categoryId);
 
   const { searchValue } = React.useContext(SearchContext);
 
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const [categoryId, setCategoryId] = useState(0);
+  // const [categoryId, setCategoryId] = useState(0);
   const [sortType, setSortType] = useState({
     name: "Popularity",
     sort: "rating",
