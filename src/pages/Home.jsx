@@ -27,15 +27,16 @@ function Home() {
     dispatch(setCategoryId(id));
   };
 
+  const onChangePage = (number) => {
+    dispatch(setCurrentPage(number));
+  };
+
   const { searchValue } = React.useContext(SearchContext);
 
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   // const [currentPage, setCurrentPage] = useState(1);
-  const onChangePage = (number) => {
-    dispatch(setCurrentPage(number));
-  };
 
   useEffect(() => {
     setIsLoading(true);
@@ -80,7 +81,7 @@ function Home() {
         <h2 className="content__title">All pizzas</h2>
         <Pagination
           currentPage={currentPage}
-          onChangePage={(number) => onChangePage()}
+          onChangePage={onChangePage}
         ></Pagination>
         <div></div>
       </div>
