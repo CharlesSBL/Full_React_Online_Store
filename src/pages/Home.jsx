@@ -10,40 +10,47 @@ import { useEffect } from "react";
 import { SearchContext } from "../App";
 
 import { useSelector, useDispatch } from "react-redux";
-import { setCategoryId } from "../redux/slices/filterSlice";
+import { setCategoryId, setCurrentPage } from "../redux/slices/filterSlice";
+
+import axios from "axios";
+import { current } from "@reduxjs/toolkit";
 
 function Home() {
   const dispatch = useDispatch();
-  const categoryId = useSelector((state) => state.filter.categoryId);
+  const { categoryId, sortType, currentPage } = useSelector((state) => {
+    const currentPage = state.filter.currentPage;
+    const categoryId = state.filter.categoryId;
+    const sortType = state.filter.sortName.sort;
+    return { categoryId, sortType, currentPage };
+  });
   const onClickCategory = (id) => {
     dispatch(setCategoryId(id));
   };
-
-  const sortType = useSelector((state) => state.filter.sortName.sort);
 
   const { searchValue } = React.useContext(SearchContext);
 
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const [currentPage, setCurrentPage] = useState(1);
+  // const [currentPage, setCurrentPage] = useState(1);
+  const onChangePage = (number) => {
+    dispatch(setCurrentPage(number));
+  };
 
   useEffect(() => {
     setIsLoading(true);
 
     const category = categoryId > 0 ? `category=${categoryId}` : "";
-    const sortBy = sortType.replace("-", "");
     const order = sortType.includes("-") ? "asc" : "desc";
-    const search = searchValue ? `&search=${searchValue}` : "desc";
+    const sortBy = sortType.replace("-", "");
+    const search = searchValue ? `&search=${searchValue}` : "";
 
     const URL = `https://639f1d625eb8889197f4b7be.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`;
 
-    fetch(URL)
-      .then((data) => data.json())
-      .then((dataJson) => {
-        setItems(dataJson);
-        setIsLoading(false);
-      });
+    axios.get(URL).then((response) => {
+      setItems(response.data);
+      setIsLoading(false);
+    });
 
     window.scrollTo(0, 0);
   }, [categoryId, sortType, searchValue, currentPage]);
@@ -72,7 +79,8 @@ function Home() {
       <div className="content__title_div">
         <h2 className="content__title">All pizzas</h2>
         <Pagination
-          onChangePage={(number) => setCurrentPage(number)}
+          currentPage={currentPage}
+          onChangePage={(number) => onChangePage()}
         ></Pagination>
         <div></div>
       </div>

@@ -53,3 +53,10 @@ npm start
 
 5. _____________________________________________
   1. npm install @reduxjs/toolkit react-redux
+
+6. _____________________________________________
+  1. npm install axios
+
+7. _____________________________________________
+  1. npm install lodash.debounce
+

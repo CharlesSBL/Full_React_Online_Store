@@ -3,19 +3,20 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setSort } from "../redux/slices/filterSlice";
 
+const arrName = [
+  { name: "Popularity ↓", sort: "rating" },
+  { name: "Popularity ↑", sort: "-rating" },
+  { name: "Price ↓", sort: "price" },
+  { name: "Price ↑", sort: "-price" },
+  { name: "Alphabet ↓", sort: "title" },
+  { name: "Alphabet ↑", sort: "-title" },
+];
+
 function Sort() {
   const dispatch = useDispatch();
   const sort = useSelector((state) => state.filter.sortName);
 
   const [popUp, setPopUp] = useState(false);
-  const arrName = [
-    { name: "Popularity ↓", sort: "rating" },
-    { name: "Popularity ↑", sort: "-rating" },
-    { name: "Price ↓", sort: "price" },
-    { name: "Price ↑", sort: "-price" },
-    { name: "Alphabet ↓", sort: "title" },
-    { name: "Alphabet ↑", sort: "-title" },
-  ];
 
   const listSeleted = (obj) => {
     dispatch(setSort(obj));
