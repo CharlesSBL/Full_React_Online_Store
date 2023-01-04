@@ -22,8 +22,8 @@ import {
 function Home() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
   const isSearch = useRef(false);
+  const isMounted = useRef(false);
 
   const { categoryId, sortType, currentPage } = useSelector((state) => {
     const currentPage = state.filter.currentPage;
@@ -58,10 +58,23 @@ function Home() {
       setItems(response.data);
       setIsLoading(false);
     });
-
-    window.scrollTo(0, 0);
   };
 
+  // if there been some changes in parametrs and been already first render
+  useEffect(() => {
+    if (isMounted.current) {
+      const queryStrings = qs.stringify({
+        sortProperty: sortType,
+        categoryId,
+        currentPage,
+      });
+
+      navigate(`?${queryStrings}`);
+    }
+    isMounted.current = true;
+  }, [categoryId, sortType, currentPage]);
+
+  // if been first render, than check url-parametres and saved them in redux
   useEffect(() => {
     if (window.location.search) {
       const params = qs.parse(window.location.search.substring(1));
@@ -79,6 +92,7 @@ function Home() {
     }
   }, []);
 
+  // if there been first render, then we do get request for getting pizzas
   useEffect(() => {
     window.scrollTo(0, 0);
 
@@ -90,16 +104,6 @@ function Home() {
   }, [categoryId, sortType, searchValue, currentPage]);
   // pierwszy render (didMount)
   //sa 3 sostajanija, render, zmiana, usuniecie
-
-  useEffect(() => {
-    const queryStrings = qs.stringify({
-      sortProperty: sortType,
-      categoryId,
-      currentPage,
-    });
-
-    navigate(`?${queryStrings}`);
-  }, [categoryId, sortType, currentPage]);
 
   const skeletons = [...new Array(6)].map((_, index) => (
     <Skeleton key={index} />
