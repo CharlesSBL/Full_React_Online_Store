@@ -1,22 +1,30 @@
-import React from "react";
-import Categories from "../components/Categories";
-import Sort from "../components/Sort";
-import PizzaBlock from "../components/PizzaBlock";
-import Skeleton from "../components/PizzaBlock/Skeleton";
-import Pagination from "../components/Pagination";
-
-import { useState } from "react";
-import { useEffect } from "react";
-import { SearchContext } from "../App";
-
-import { useSelector, useDispatch } from "react-redux";
-import { setCategoryId, setCurrentPage } from "../redux/slices/filterSlice";
+import React, { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import axios from "axios";
-import { current } from "@reduxjs/toolkit";
+import qs from "qs";
+
+import { SearchContext } from "../App";
+
+import Categories from "../components/Categories";
+import Pagination from "../components/Pagination";
+import PizzaBlock from "../components/PizzaBlock";
+import Skeleton from "../components/PizzaBlock/Skeleton";
+import Sort, { arrName } from "../components/Sort";
+
+import {
+  setCategoryId,
+  setCurrentPage,
+  setFilters,
+} from "../redux/slices/filterSlice";
 
 function Home() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const isSearch = useRef(false);
+
   const { categoryId, sortType, currentPage } = useSelector((state) => {
     const currentPage = state.filter.currentPage;
     const categoryId = state.filter.categoryId;
@@ -36,9 +44,7 @@ function Home() {
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  // const [currentPage, setCurrentPage] = useState(1);
-
-  useEffect(() => {
+  const fetchPizzas = () => {
     setIsLoading(true);
 
     const category = categoryId > 0 ? `category=${categoryId}` : "";
@@ -54,13 +60,51 @@ function Home() {
     });
 
     window.scrollTo(0, 0);
+  };
+
+  useEffect(() => {
+    if (window.location.search) {
+      const params = qs.parse(window.location.search.substring(1));
+
+      const sortList = arrName.find((obj) => obj.sort == params.sortName);
+
+      dispatch(
+        setFilters({
+          ...params,
+          sortList,
+        })
+      );
+
+      isSearch.current = true;
+    }
+  }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+
+    if (!isSearch.current) {
+      fetchPizzas();
+    }
+
+    isSearch.current = false;
   }, [categoryId, sortType, searchValue, currentPage]);
   // pierwszy render (didMount)
   //sa 3 sostajanija, render, zmiana, usuniecie
 
+  useEffect(() => {
+    const queryStrings = qs.stringify({
+      sortProperty: sortType,
+      categoryId,
+      currentPage,
+    });
+
+    navigate(`?${queryStrings}`);
+  }, [categoryId, sortType, currentPage]);
+
   const skeletons = [...new Array(6)].map((_, index) => (
     <Skeleton key={index} />
   ));
+
   const pizzas = items
     .filter((obj) => {
       return obj.title.toLowerCase().includes(searchValue.toLowerCase());
@@ -91,3 +135,4 @@ function Home() {
 }
 
 export default Home;
+// makaka

@@ -1,9 +1,9 @@
 import { useState } from "react";
 
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setSort } from "../redux/slices/filterSlice";
 
-const arrName = [
+export const arrName = [
   { name: "Popularity ↓", sort: "rating" },
   { name: "Popularity ↑", sort: "-rating" },
   { name: "Price ↓", sort: "price" },
