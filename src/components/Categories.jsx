@@ -1,12 +1,11 @@
-import { useState } from "react";
-
-function Categories({ value, onClickCategory }) {
+const Categories = ({ value, onClickCategory }) => {
   const categories = ["All", "Meat", "Vegetarian", "Grill", "Spicy", "Closed"];
 
   const ListItem = ({ categoryName, index }) => (
     <li
       onClick={() => onClickCategory(index)}
-      className={value == index ? "active" : ""}
+      className={value === index ? "active" : ""}
+      type="button"
     >
       {categoryName}
     </li>
@@ -21,6 +20,6 @@ function Categories({ value, onClickCategory }) {
       </ul>
     </div>
   );
-}
+};
 
 export default Categories;
