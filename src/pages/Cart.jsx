@@ -42,7 +42,7 @@ export default function Cart() {
                 data-darkreader-inline-stroke=""
               ></path>
             </svg>
-            Корзина
+            Cart
           </h2>
           <div className="cart__clear">
             <svg
@@ -90,7 +90,7 @@ export default function Cart() {
               ></path>
             </svg>
 
-            <span>Очистить корзину</span>
+            <span>Clear a Cart</span>
           </div>
         </div>
         <div className="content__items">
@@ -447,11 +447,11 @@ export default function Cart() {
           <div className="cart__bottom-details">
             <span>
               {" "}
-              Всего пицц: <b>3 шт.</b>{" "}
+              All Pizzas: <b>3 it.</b>{" "}
             </span>
             <span>
               {" "}
-              Сумма заказа: <b>900 ₽</b>{" "}
+              Finall Price: <b>90 eu</b>{" "}
             </span>
           </div>
           <div className="cart__bottom-buttons">
@@ -477,10 +477,10 @@ export default function Cart() {
                 ></path>
               </svg>
 
-              <span>Вернуться назад</span>
+              <span>Back</span>
             </Link>
             <div className="button pay-btn">
-              <span>Оплатить сейчас</span>
+              <span>Pay Now</span>
             </div>
           </div>
         </div>
