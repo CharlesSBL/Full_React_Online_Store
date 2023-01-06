@@ -76,6 +76,8 @@ function Home() {
 
   // if been first render, than check url-parametres and saved them in redux
   useEffect(() => {
+    fetchPizzas();
+
     if (window.location.search) {
       const params = qs.parse(window.location.search.substring(1));
 
