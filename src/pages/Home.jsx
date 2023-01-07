@@ -129,13 +129,17 @@ function Home() {
 
       <div className="content__title_div">
         <h2 className="content__title">All pizzas</h2>
-        <Pagination
+        {/* <Pagination
           currentPage={currentPage}
           onChangePage={onChangePage}
-        ></Pagination>
+        ></Pagination> */}
         <div></div>
       </div>
       <div className="content__items">{isLoading ? skeletons : pizzas}</div>
+      <Pagination
+        currentPage={currentPage}
+        onChangePage={onChangePage}
+      ></Pagination>
     </div>
   );
 }

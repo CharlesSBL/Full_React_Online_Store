@@ -11,6 +11,10 @@ function Header() {
     return { items, totalPrice };
   });
 
+  const totalCount = items.reduce((sum, item) => {
+    return sum + item.count;
+  }, 0);
+
   return (
     <div className="header">
       <div className="container">
@@ -63,7 +67,7 @@ function Header() {
                 data-darkreader-inline-stroke=""
               ></path>
             </svg>
-            <span>{items.length}</span>
+            <span>{totalCount}</span>
           </Link>
         </div>
       </div>
