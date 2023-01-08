@@ -31,6 +31,7 @@ function Home() {
     const sortType = state.filter.sortName.sort;
     return { categoryId, sortType, currentPage };
   });
+
   const onClickCategory = (id) => {
     dispatch(setCategoryId(id));
   };
@@ -44,7 +45,7 @@ function Home() {
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const fetchPizzas = () => {
+  const fetchPizzas = async () => {
     setIsLoading(true);
 
     const category = categoryId > 0 ? `category=${categoryId}` : "";
@@ -54,10 +55,16 @@ function Home() {
 
     const URL = `https://639f1d625eb8889197f4b7be.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`;
 
-    axios.get(URL).then((response) => {
-      setItems(response.data);
+    try {
+      const res = await axios.get(URL);
+      setItems(res.data);
       setIsLoading(false);
-    });
+    } catch (error) {
+      setIsLoading(false);
+      console.log("+++error", error);
+      alert(error);
+    } finally {
+    }
   };
 
   // if there been some changes in parametrs and been already first render
