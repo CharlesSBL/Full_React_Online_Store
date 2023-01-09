@@ -32,6 +32,22 @@ body {
     margin-bottom: 50px;
   }
 
+  &__error-info {
+    margin: 60px auto;
+    width: 580px;
+    text-align: center;
+
+    h2 {
+      font-size: 42px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 22px;
+    }
+  }
+
   &__items {
     display: grid;
     grid-template-columns: repeat(4, 1fr);

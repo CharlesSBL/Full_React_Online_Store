@@ -6,6 +6,8 @@ import CartItem from "../components/CartItem";
 import { clearItems } from "../redux/slices/cartSlice";
 import CartEmpty from "../components/CartEmpty";
 
+import { selectCart } from "../redux/slices/cartSlice";
+
 export default function Cart() {
   const dispatch = useDispatch();
 
