@@ -179,12 +179,16 @@ function Home() {
 
   const { items, status } = useSelector((state) => state.pizza);
 
-  const { categoryId, sortType, currentPage } = useSelector((state) => {
-    const currentPage = state.filter.currentPage;
-    const categoryId = state.filter.categoryId;
-    const sortType = state.filter.sortName.sort;
-    return { categoryId, sortType, currentPage };
-  });
+  const { categoryId, sortType, currentPage, searchValue } = useSelector(
+    (state) => {
+      const currentPage = state.filter.currentPage;
+      const categoryId = state.filter.categoryId;
+      const sortType = state.filter.sortName.sort;
+      const searchValue = state.filter.searchValue;
+
+      return { categoryId, sortType, currentPage, searchValue };
+    }
+  );
 
   const onClickCategory = (id) => {
     dispatch(setCategoryId(id));
@@ -194,7 +198,7 @@ function Home() {
     dispatch(setCurrentPage(number));
   };
 
-  const { searchValue } = React.useContext(SearchContext);
+  // const { searchValue } = React.useContext(SearchContext);
 
   // const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
