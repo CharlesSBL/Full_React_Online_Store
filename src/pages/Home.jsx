@@ -153,7 +153,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import qs from "qs";
 
-import { SearchContext } from "../App";
+// import { SearchContext } from "../App";
 
 import Categories from "../components/Categories";
 import Pagination from "../components/Pagination";

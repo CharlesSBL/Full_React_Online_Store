@@ -3,8 +3,18 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-export default function FullPizza() {
-  const [pizza, setPizza] = useState();
+const FullPizza: React.FC = () => {
+  // ukazujemy ze moze jedynie sie ukazywac typ: obj z zadanymi takimi polami
+  const [pizza, setPizza] = useState<{
+    imageUrl: string;
+    title: string;
+    price: number;
+  }>({
+    imageUrl: "",
+    title: "",
+    price: 0,
+  });
+
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -28,7 +38,7 @@ export default function FullPizza() {
   }, []);
 
   if (!pizza) {
-    return "Loading...";
+    return <>Loading...</>;
   }
 
   return (
@@ -38,4 +48,6 @@ export default function FullPizza() {
       <h4>{pizza.price} eu.</h4>
     </div>
   );
-}
+};
+
+export default FullPizza;

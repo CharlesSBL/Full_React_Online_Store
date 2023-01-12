@@ -62,3 +62,15 @@ npm start
 
 8. _____________________________________________
   1. npm install qs
+
+9. _____________________________________________
+  0. info: https://create-react-app.dev/docs/adding-typescript/
+
+  1. Jesli trzeba od "0" zaczac react TypeScript project app
+    piszemy: "yarn create react-app my-app --template typescript"
+  
+  2. Jesli do istniejacego projektu dodajemy 
+    piszemy: "npm install --save typescript @types/node @types/react @types/react-dom @types/jest"
+
+10. _____________________________________________
+  0. info: google: tsconfig react example 

@@ -1,7 +1,6 @@
-import React, { Children, useState } from "react";
-import "./scss/app.scss";
+// import React, { Children, useState } from "react";
 
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 // import Header from "./components/Header";
 import Home from "./pages/Home";
@@ -9,6 +8,7 @@ import NotFound from "./pages/NotFound";
 import Cart from "./pages/Cart";
 import FullPizza from "./pages/FullPizza";
 
+import "./scss/app.scss";
 import MainLayout from "./layouts/MainLayout";
 
 // export const SearchContext = React.createContext();
