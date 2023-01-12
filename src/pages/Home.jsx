@@ -171,6 +171,8 @@ import { setItems, fetchPizzas } from "../redux/slices/pizzaSlice";
 
 import { selectCart } from "../redux/slices/cartSlice";
 
+import { Link } from "react-router-dom";
+
 function Home() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -214,6 +216,7 @@ function Home() {
     const URL = `https://639f1d625eb8889197f4b7be.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`;
 
     dispatch(fetchPizzas({ category, order, sortBy, search, currentPage }));
+
     setIsLoading(false);
   };
 
@@ -272,7 +275,12 @@ function Home() {
     .filter((obj) => {
       return obj.title.toLowerCase().includes(searchValue.toLowerCase());
     })
-    .map((elem) => <PizzaBlock key={elem.id} {...elem} />);
+    // .map((elem) => <PizzaBlock key={elem.id} {...elem} />);
+    .map((elem) => (
+      <Link key={elem.id} to={`/pizza/${elem.id}`}>
+        <PizzaBlock key={elem.id} {...elem} />
+      </Link>
+    ));
 
   return (
     <div className="container">
