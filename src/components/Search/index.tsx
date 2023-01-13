@@ -8,20 +8,25 @@ import debounce from "lodash.debounce";
 import { useDispatch } from "react-redux";
 import { setSearchValue } from "../../redux/slices/filterSlice";
 
-export default function Search() {
+const Search: React.FC = () => {
   const dispatch = useDispatch();
 
-  const inputRef = React.useRef();
+  const inputRef = React.useRef<HTMLInputElement>(null);
 
-  const [value, setValue] = useState();
+  const [value, setValue] = useState<string>();
 
   // const { searchValue, setSearchValue } = React.useContext(SearchContext);
 
-  const onClickClear = () => {
+  const onClickClear = (event: React.MouseEvent<SVGSVGElement>) => {
+    // console.log(event);
+
     dispatch(setSearchValue(""));
     setValue("");
     setSearchValue("");
-    inputRef.current.focus();
+
+    //ukazujemy operator (?) opcjonalnej "posledowanosci"
+    // jesli jest (current), to ma wyzwac funkcje (focus)
+    inputRef.current?.focus();
   };
 
   const updateSearch = React.useCallback(
@@ -31,10 +36,11 @@ export default function Search() {
     []
   );
 
-  const onChangeInput = (event) => {
-    // setSearchValue(event.target.value);
+  // Ukazujemy co zwraca func (onChange) w (input)
+  // i ukazujemy typu dannych (ChangeEvent) jaki dokladnie typ eventu
+  const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(event.target.value);
     updateSearch(event.target.value);
-    console.log(event);
   };
 
   return (
@@ -60,8 +66,8 @@ export default function Search() {
       />
       {value && (
         <svg
-          onClick={() => {
-            onClickClear();
+          onClick={(ev) => {
+            onClickClear(ev);
           }}
           className={styles.clearIcon}
           height="48"
@@ -75,4 +81,6 @@ export default function Search() {
       )}
     </div>
   );
-}
+};
+
+export default Search;

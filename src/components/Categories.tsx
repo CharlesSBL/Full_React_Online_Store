@@ -2,8 +2,13 @@ import React from "react";
 
 type CategoriesProps = {
   value: number;
-  onClickCategory: any;
+  // ukazujemy typ (function)
+  // ktory nie wymaga przy return zadnego znaczenia
+  // void oznacza ze zwroci "nic"
+  onClickCategory: (index: number) => void;
 };
+
+const categories = ["All", "Meat", "Vegetarian", "Grill", "Spicy", "Closed"];
 
 // ukazujemy ze wewnatrz siebie ma przyjmowac specjalny property
 // wtedy React.FC automatycznie typyzuje props ktore przychodza
@@ -11,8 +16,6 @@ const Categories: React.FC<CategoriesProps> = ({
   value,
   onClickCategory,
 }: CategoriesProps) => {
-  const categories = ["All", "Meat", "Vegetarian", "Grill", "Spicy", "Closed"];
-
   return (
     <div className="categories">
       <ul>

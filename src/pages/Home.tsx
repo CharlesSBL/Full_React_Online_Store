@@ -173,16 +173,16 @@ import { selectCart } from "../redux/slices/cartSlice";
 
 import { Link } from "react-router-dom";
 
-function Home() {
+const Home: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isSearch = useRef(false);
   const isMounted = useRef(false);
 
-  const { items, status } = useSelector((state) => state.pizza);
+  const { items, status } = useSelector((state: any) => state.pizza);
 
   const { categoryId, sortType, currentPage, searchValue } = useSelector(
-    (state) => {
+    (state: any) => {
       const currentPage = state.filter.currentPage;
       const categoryId = state.filter.categoryId;
       const sortType = state.filter.sortName.sort;
@@ -192,12 +192,12 @@ function Home() {
     }
   );
 
-  const onClickCategory = (id) => {
+  const onClickCategory = (id: number) => {
     dispatch(setCategoryId(id));
   };
 
-  const onChangePage = (number) => {
-    dispatch(setCurrentPage(number));
+  const onChangePage = (val: number) => {
+    dispatch(setCurrentPage(val));
   };
 
   // const { searchValue } = React.useContext(SearchContext);
@@ -214,7 +214,7 @@ function Home() {
     const search = searchValue ? `&search=${searchValue}` : "";
 
     const URL = `https://639f1d625eb8889197f4b7be.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`;
-
+    // @ts-ignore
     dispatch(fetchPizzas({ category, order, sortBy, search, currentPage }));
 
     setIsLoading(false);
@@ -272,11 +272,11 @@ function Home() {
   ));
 
   const pizzas = items
-    .filter((obj) => {
+    .filter((obj: any) => {
       return obj.title.toLowerCase().includes(searchValue.toLowerCase());
     })
     // .map((elem) => <PizzaBlock key={elem.id} {...elem} />);
-    .map((elem) => (
+    .map((elem: any) => (
       <Link key={elem.id} to={`/pizza/${elem.id}`}>
         <PizzaBlock key={elem.id} {...elem} />
       </Link>
@@ -287,7 +287,7 @@ function Home() {
       <div className="content__top">
         <Categories
           value={categoryId}
-          onClickCategory={(i) => onClickCategory(i)}
+          onClickCategory={(i: number) => onClickCategory(i)}
         />
         <Sort />
       </div>
@@ -319,7 +319,7 @@ function Home() {
       ></Pagination>
     </div>
   );
-}
+};
 
 export default Home;
 // makaka

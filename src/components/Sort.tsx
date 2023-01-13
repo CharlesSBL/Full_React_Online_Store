@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { setSort } from "../redux/slices/filterSlice";
@@ -7,6 +7,14 @@ type SortItem = {
   name: string;
   sort: string;
 };
+
+type PopupClick = MouseEvent & {
+  path: Node[];
+};
+
+// type SortPopupProps = {
+//   value: SortType;
+// };
 
 export const arrName: SortItem[] = [
   { name: "Popularity ↓", sort: "rating" },
@@ -20,7 +28,7 @@ export const arrName: SortItem[] = [
 function Sort() {
   const dispatch = useDispatch();
   const sort = useSelector((state: any) => state.filter.sortName);
-  const sortRef = useRef<HTMLDivElement>(null);
+  const sortRef = React.useRef<HTMLDivElement>(null);
 
   const [popUp, setPopUp] = useState(false);
 
@@ -30,8 +38,19 @@ function Sort() {
   };
 
   useEffect(() => {
-    const handleClickOutside = (event: any) => {
-      if (!event.path.includes(sortRef.current)) {
+    // Jak nie robic ---------------------------------
+    // const handleClickOutside = (event: MouseEvent) => {
+    //   const _event = event as MouseEvent & {
+    //     path: Node[];
+    //   };
+    //   if (sortRef.current && !_event.path.includes(sortRef.current)) {
+    //     setPopUp(false);
+    //   }
+    // };
+
+    const handleClickOutside = (event: MouseEvent) => {
+      // event.composedPath() zwraca (path) eventa
+      if (sortRef.current && !event.composedPath().includes(sortRef.current)) {
         setPopUp(false);
       }
     };
