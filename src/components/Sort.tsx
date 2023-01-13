@@ -3,7 +3,12 @@ import { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setSort } from "../redux/slices/filterSlice";
 
-export const arrName = [
+type SortItem = {
+  name: string;
+  sort: string;
+};
+
+export const arrName: SortItem[] = [
   { name: "Popularity ↓", sort: "rating" },
   { name: "Popularity ↑", sort: "-rating" },
   { name: "Price ↓", sort: "price" },
@@ -14,20 +19,19 @@ export const arrName = [
 
 function Sort() {
   const dispatch = useDispatch();
-  const sort = useSelector((state) => state.filter.sortName);
-  const sortRef = useRef();
+  const sort = useSelector((state: any) => state.filter.sortName);
+  const sortRef = useRef<HTMLDivElement>(null);
 
   const [popUp, setPopUp] = useState(false);
 
-  const listSeleted = (obj) => {
+  const listSeleted = (obj: SortItem) => {
     dispatch(setSort(obj));
     setPopUp(!popUp);
   };
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
+    const handleClickOutside = (event: any) => {
       if (!event.path.includes(sortRef.current)) {
-        console.log("clikc");
         setPopUp(false);
       }
     };

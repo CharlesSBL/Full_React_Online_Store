@@ -4,12 +4,12 @@ import Search from "./Search";
 import { useSelector } from "react-redux";
 import { selectCart } from "../redux/slices/cartSlice";
 
-function Header() {
+const Header = () => {
   const { items, totalPrice } = useSelector(selectCart);
   // const pathname = window.location.pathname;
   const location = useLocation();
 
-  const totalCount = items.reduce((sum, item) => {
+  const totalCount = items.reduce((sum: number, item: any) => {
     return sum + item.count;
   }, 0);
 
@@ -73,6 +73,6 @@ function Header() {
       </div>
     </div>
   );
-}
+};
 
 export default Header;

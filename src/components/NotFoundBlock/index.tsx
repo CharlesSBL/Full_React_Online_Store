@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./NotFoundBlock.module.scss";
 
-export default function NotFoundBlock() {
+const NotFoundBlock: React.FC = () => {
   return (
     <div className={styles.root}>
       <span role="img" aria-label="sad face">
@@ -11,4 +11,6 @@ export default function NotFoundBlock() {
       <p className={styles.description}>Can't find the page</p>
     </div>
   );
-}
+};
+
+export default NotFoundBlock;

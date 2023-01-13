@@ -16,5 +16,6 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
+  // ukazujemy nasz modul z typami dannych zeby mogl je rozpoznawac
   "include": ["src", "src/@types"]
 }
