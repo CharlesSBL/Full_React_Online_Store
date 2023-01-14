@@ -152,11 +152,7 @@ const Home: React.FC = () => {
       return obj.title.toLowerCase().includes(searchValue.toLowerCase());
     })
     // .map((elem) => <PizzaBlock key={elem.id} {...elem} />);
-    .map((elem: any) => (
-      <Link key={elem.id} to={`/pizza/${elem.id}`}>
-        <PizzaBlock key={elem.id} {...elem} />
-      </Link>
-    ));
+    .map((elem: any) => <PizzaBlock key={elem.id} {...elem} />);
 
   return (
     <div className="container">
