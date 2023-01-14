@@ -3,6 +3,8 @@ import React, { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setSort } from "../redux/slices/filterSlice";
 
+import { Sort } from "../redux/slices/filterSlice";
+
 type SortItem = {
   name: string;
   sort: string;
@@ -25,7 +27,7 @@ export const arrName: SortItem[] = [
   { name: "Alphabet ↑", sort: "-title" },
 ];
 
-function Sort() {
+function SortComp() {
   const dispatch = useDispatch();
   const sort = useSelector((state: any) => state.filter.sortName);
   const sortRef = React.useRef<HTMLDivElement>(null);
@@ -33,7 +35,7 @@ function Sort() {
   const [popUp, setPopUp] = useState(false);
 
   const listSeleted = (obj: SortItem) => {
-    dispatch(setSort(obj));
+    dispatch(setSort(obj as Sort));
     setPopUp(!popUp);
   };
 
@@ -101,5 +103,5 @@ function Sort() {
   );
 }
 
-export default Sort;
+export default SortComp;
 // 25:29
