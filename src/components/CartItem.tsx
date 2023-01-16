@@ -1,6 +1,7 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { addItem, removeItem, minusItem } from "../redux/slices/cartSlice";
+import { useDispatch } from "react-redux";
+import { addItem, removeItem, minusItem } from "../redux/slices/cart/slice";
+import clsx from "clsx";
 
 type CartItemProps = {
   id: string;
@@ -59,9 +60,16 @@ const CartItem: React.FC<CartItemProps> = ({
         </p>
       </div>
       <div className="cart__item-count">
-        <div
+        <button
+          disabled={count == 1}
           onClick={onClickMinus}
-          className="button button--outline button--circle cart__item-count-minus"
+          // ukazujemy w clsx, ze ma po default dawac (te) klasy
+          // i jesli (count == 1) ma przykrecic jeszcze 1 dodatkowy class
+          // takze jesli bedzie false, to ma go usunac
+          className={clsx(
+            "button button--outline button--circle cart__item-count-minus",
+            { "cart__item-count-minus--disabled": count == 1 }
+          )}
         >
           <svg
             width="10"
@@ -83,9 +91,9 @@ const CartItem: React.FC<CartItemProps> = ({
               data-darkreader-inline-fill=""
             ></path>
           </svg>
-        </div>
+        </button>
         <b>{count}</b>
-        <div
+        <button
           onClick={onClickPlus}
           className="button button--outline button--circle cart__item-count-plus"
         >
@@ -109,7 +117,7 @@ const CartItem: React.FC<CartItemProps> = ({
               data-darkreader-inline-fill=""
             ></path>
           </svg>
-        </div>
+        </button>
       </div>
       <div className="cart__item-price">
         <b>{price * count} €</b>

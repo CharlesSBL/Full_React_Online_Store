@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { addItem, CartItem } from "../../redux/slices/cartSlice";
-import { selectCartItemById } from "../../redux/slices/cartSlice";
+import { addItem } from "../../redux/slices/cart/slice";
+import { CartItem } from "../../redux/slices/cart/types";
+import { selectCartItemById } from "../../redux/slices/cart/selectors";
 
 const typesNames = ["thin", "traditional"];
 

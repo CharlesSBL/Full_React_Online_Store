@@ -2,7 +2,8 @@ import { Link, useLocation } from "react-router-dom";
 import logoImg from "../assets/img/pizza-logo.svg";
 import Search from "./Search";
 import { useSelector } from "react-redux";
-import { selectCart } from "../redux/slices/cartSlice";
+import { selectCart } from "../redux/slices/cart/selectors";
+import React, { useRef } from "react";
 
 const Header = () => {
   const { items, totalPrice } = useSelector(selectCart);
@@ -12,6 +13,21 @@ const Header = () => {
   const totalCount = items.reduce((sum: number, item: any) => {
     return sum + item.count;
   }, 0);
+
+  const isMounted = useRef(false);
+
+  // zapisujemy w pamieci (localStorage) info
+  // bedzie zapisywac do (localStorage) w wypadku gdy, (value items) bedzie sie zmieniac
+  React.useEffect(() => {
+    if (isMounted.current) {
+      // najpierw danne ktore chcemy zapisac, musimy zamienic w (string)
+      const json = JSON.stringify(items);
+
+      // po tym wsadza sie jako (klucz-znaczenie) do localStorage
+      localStorage.setItem("cart", json);
+    }
+    isMounted.current = true;
+  }, [items]);
 
   return (
     <div className="header">

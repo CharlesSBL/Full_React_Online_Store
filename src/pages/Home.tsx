@@ -1,8 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import axios from "axios";
+// import axios from "axios";
 import qs from "qs";
 
 // import { SearchContext } from "../App";
@@ -11,22 +11,24 @@ import Categories from "../components/Categories";
 import Pagination from "../components/Pagination";
 import PizzaBlock from "../components/PizzaBlock";
 import Skeleton from "../components/PizzaBlock/Skeleton";
-import Sort, { arrName } from "../components/Sort";
+import { arrName } from "../components/Sort";
 
 import {
-  FilterSliceState,
   setCategoryId,
   setCurrentPage,
   setFilters,
-} from "../redux/slices/filterSlice";
+} from "../redux/slices/filter/slice";
 
-import { setItems, fetchPizzas } from "../redux/slices/pizzaSlice";
+// import { FilterSliceState } from "../redux/slices/filter/types";
 
-import { selectCart } from "../redux/slices/cartSlice";
+// import { setItems } from "../redux/slices/pizzaSlice";
 
-import { Link } from "react-router-dom";
+// import { selectCart } from "../redux/slices/cart/selectors";
+
+// import { Link } from "react-router-dom";
 import { useAppDispatch } from "../redux/store";
 import SortComp from "../components/Sort";
+import { fetchPizzas } from "../redux/slices/asyncFunc/FetchPizzas";
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
@@ -47,9 +49,10 @@ const Home: React.FC = () => {
     }
   );
 
-  const onClickCategory = (id: number) => {
+  // ukazujemy ze ma sie odpalic przy 1 renderze
+  const onClickCategory = useCallback((id: number) => {
     dispatch(setCategoryId(id));
-  };
+  }, []);
 
   const onChangePage = (val: number) => {
     dispatch(setCurrentPage(val));

@@ -1,9 +1,12 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { setSort } from "../redux/slices/filterSlice";
+import { setSort } from "../redux/slices/filter/slice";
 
-import { Sort } from "../redux/slices/filterSlice";
+import { Sort } from "../redux/slices/filter/types";
+
+// import { useWhyDidYouUpdate } from "ahooks";
+// useWhyDidYouUpdate("SortComp", {});
 
 type SortItem = {
   name: string;
@@ -27,7 +30,7 @@ export const arrName: SortItem[] = [
   { name: "Alphabet ↑", sort: "-title" },
 ];
 
-function SortComp() {
+const SortComp: React.FC = React.memo(() => {
   const dispatch = useDispatch();
   const sort = useSelector((state: any) => state.filter.sortName);
   const sortRef = React.useRef<HTMLDivElement>(null);
@@ -101,7 +104,7 @@ function SortComp() {
       )}
     </div>
   );
-}
+});
 
 export default SortComp;
 // 25:29
