@@ -1,49 +1,58 @@
-// import React, { Children, useState } from "react";
-
 import { Routes, Route } from "react-router-dom";
-
-// import Header from "./components/Header";
-import Home from "./pages/Home";
-import NotFound from "./pages/NotFound";
-import Cart from "./pages/Cart";
-import FullPizza from "./pages/FullPizza";
 
 import "./scss/app.scss";
 import MainLayout from "./layouts/MainLayout";
+import React from "react";
 
-// export const SearchContext = React.createContext();
+import { Suspense } from "react";
 
-// function Parent({ children }) {
-//   return (
-//     <div>
-//       <h1>Header</h1>
-//       {/* {children} */}
-//       <Outlet />
-//       <h4>123. 123. 123.</h4>
-//     </div>
-//   );
-// }
+// bedzie ladowac strony tylko wtedy gdy to bedzie potrzebne
+// tym samym skracamy czas 1 ladowania strony
+// rozbijamy app na chunks
+const Home = React.lazy(() => import("./pages/Home"));
+const NotFound = React.lazy(() => import("./pages/NotFound"));
+const Cart = React.lazy(() => import("./pages/Cart"));
+const FullPizza = React.lazy(() => import("./pages/FullPizza"));
 
 const App = () => {
-  // const [searchValue, setSearchValue] = useState("");
-
   return (
-    // <div className="wrapper">
-    // {/* <SearchContext.Provider value={{ searchValue, setSearchValue }}> */}
-    // <Header />
-    // {/* <Parent>aaa</Parent> */}
-    // <div className="content">
     <Routes>
       <Route path="/" element={<MainLayout />}>
-        <Route path="" element={<Home />} />
-        <Route path="cart" element={<Cart />} />
-        <Route path="pizza/:id" element={<FullPizza />} />
-        <Route path="*" element={<NotFound />} />
+        <Route
+          path=""
+          element={
+            <Suspense fallback={<div>Loading...</div>}>
+              <Home />
+            </Suspense>
+          }
+        />
+        {/* <Route path="cart" element={<Cart />} /> */}
+        <Route
+          path="cart"
+          element={
+            <Suspense fallback={<div>Loading...</div>}>
+              <Cart></Cart>
+            </Suspense>
+          }
+        />
+        <Route
+          path="pizza/:id"
+          element={
+            <Suspense fallback={<div>Loading...</div>}>
+              <FullPizza />
+            </Suspense>
+          }
+        />
+        <Route
+          path="*"
+          element={
+            <Suspense fallback={<div>Loading...</div>}>
+              <NotFound />
+            </Suspense>
+          }
+        />
       </Route>
     </Routes>
-    // </div>
-    // {/* </SearchContext.Provider> */}
-    // </div>
   );
 };
 

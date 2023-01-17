@@ -1,17 +1,17 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
-// import axios from "axios";
 import qs from "qs";
-
-// import { SearchContext } from "../App";
-
-import Categories from "../components/Categories";
-import Pagination from "../components/Pagination";
-import PizzaBlock from "../components/PizzaBlock";
-import Skeleton from "../components/PizzaBlock/Skeleton";
 import { arrName } from "../components/Sort";
+
+// ReExport
+import {
+  Categories,
+  Pagination,
+  PizzaBlock,
+  Skeleton,
+  SortComp,
+} from "../components";
 
 import {
   setCategoryId,
@@ -19,15 +19,7 @@ import {
   setFilters,
 } from "../redux/slices/filter/slice";
 
-// import { FilterSliceState } from "../redux/slices/filter/types";
-
-// import { setItems } from "../redux/slices/pizzaSlice";
-
-// import { selectCart } from "../redux/slices/cart/selectors";
-
-// import { Link } from "react-router-dom";
 import { useAppDispatch } from "../redux/store";
-import SortComp from "../components/Sort";
 import { fetchPizzas } from "../redux/slices/asyncFunc/FetchPizzas";
 
 const Home: React.FC = () => {
@@ -49,6 +41,13 @@ const Home: React.FC = () => {
     }
   );
 
+  // rozdziela kod na chunks dla optymizacji app
+  // za pomoca bundle tworzy code splitting
+  // import("../utils/math").then((Math) => {
+  //   console.log(Math.add(16, 26));
+  // });
+  // add(55555, 88888);
+
   // ukazujemy ze ma sie odpalic przy 1 renderze
   const onClickCategory = useCallback((id: number) => {
     dispatch(setCategoryId(id));
@@ -58,9 +57,6 @@ const Home: React.FC = () => {
     dispatch(setCurrentPage(val));
   };
 
-  // const { searchValue } = React.useContext(SearchContext);
-
-  // const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const getPizzas = async () => {
@@ -70,8 +66,6 @@ const Home: React.FC = () => {
     const order = sortType.includes("-") ? "asc" : "desc";
     const sortBy = sortType.replace("-", "");
     const search = searchValue ? `&search=${searchValue}` : "";
-
-    const URL = `https://639f1d625eb8889197f4b7be.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`;
 
     dispatch(
       fetchPizzas({

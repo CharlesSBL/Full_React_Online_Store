@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const FullPizza: React.FC = () => {
   // ukazujemy ze moze jedynie sie ukazywac typ: obj z zadanymi takimi polami
@@ -46,6 +47,11 @@ const FullPizza: React.FC = () => {
       <img src={pizza.imageUrl} alt="pizza image" />
       <h2>{pizza.title}</h2>
       <h4>{pizza.price} eu.</h4>
+      <Link to="/">
+        <button className="button button--outline button--add">
+          <span>Back</span>
+        </button>
+      </Link>
     </div>
   );
 };
