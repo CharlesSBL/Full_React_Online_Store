@@ -2,6 +2,8 @@ Here is the Site =>>>> https://online-store-2022-gn3td7td6-charlessbl.vercel.app
 
 It has Paypal payment
 
+Check out another Menu site =>>> https://charlessbl.github.io/15_JS_Projects_Vanilla_JavaScript/08_Menu/index.html
+
 ======= Used Tech Stack
 ..
 
