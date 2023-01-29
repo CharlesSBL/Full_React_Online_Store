@@ -126,6 +126,31 @@ body {
       margin: 0;
     }
   }
+
+  &__pizza {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    &_div {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      &_btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 25px;
+        margin-top: 75px;
+      }
+
+      * {
+        font-size: 48px;
+      }
+    }
+  }
 }
 
 .cart {
