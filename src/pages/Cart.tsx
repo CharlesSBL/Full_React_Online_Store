@@ -6,10 +6,6 @@ import CartItem from "../components/CartItem";
 import { clearItems } from "../redux/slices/cart/slice";
 import CartEmpty from "../components/CartEmpty";
 
-// import PayPalBtn from "../components/PayPal/PayPalBtn";
-
-// import { selectCart } from "../redux/slices/cartSlice";
-
 const Cart: React.FC = () => {
   const dispatch = useDispatch();
 
@@ -139,7 +135,7 @@ const Cart: React.FC = () => {
             </span>
             <span>
               {" "}
-              Finall Price: <b>{totalPrice} €</b>{" "}
+              Finall Price: <b>{totalPrice} $</b>{" "}
             </span>
           </div>
           <div className="cart__bottom-buttons">

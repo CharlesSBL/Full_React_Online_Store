@@ -47,7 +47,7 @@ const FullPizza: React.FC = () => {
       <img src={pizza.imageUrl} alt="pizza image" />
       <div className="container__pizza_div">
         <h2>{pizza.title}</h2>
-        <h4>{pizza.price} eu.</h4>
+        <h4>{pizza.price} USD.</h4>
         <Link to="/">
           <button className="button button--outline button--add container__pizza_div_btn">
             <span>Back</span>
