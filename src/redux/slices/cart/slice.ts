@@ -40,9 +40,12 @@ const cartSlice = createSlice({
       });
     },
     minusItem(state, action: PayloadAction<string>) {
-      const findItem = state.items.find((obj) => obj.id == action.payload);
+      const findItem = state.items.find((obj) => {
+        return obj.id == action.payload;
+      });
       if (findItem) {
         findItem.count--;
+        state.totalPrice -= findItem.price;
       }
     },
     clearItems(state) {

@@ -148,7 +148,6 @@ const Home: React.FC = () => {
     .filter((obj: any) => {
       return obj.title.toLowerCase().includes(searchValue.toLowerCase());
     })
-    // .map((elem) => <PizzaBlock key={elem.id} {...elem} />);
     .map((elem: any) => <PizzaBlock key={elem.id} {...elem} />);
 
   return (

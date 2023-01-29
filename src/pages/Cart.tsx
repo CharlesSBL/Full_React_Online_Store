@@ -6,11 +6,14 @@ import CartItem from "../components/CartItem";
 import { clearItems } from "../redux/slices/cart/slice";
 import CartEmpty from "../components/CartEmpty";
 
+// import PayPalBtn from "../components/PayPal/PayPalBtn";
+
 // import { selectCart } from "../redux/slices/cartSlice";
 
 const Cart: React.FC = () => {
   const dispatch = useDispatch();
 
+  // wyciagam z redux cart, cene, dla paypal
   const { items, totalPrice } = useSelector((state: any) => {
     const items = state.cart.items;
     const totalPrice = state.cart.totalPrice;
@@ -164,9 +167,12 @@ const Cart: React.FC = () => {
 
               <span>Back</span>
             </Link>
-            <div className="button pay-btn">
-              <span>Pay Now</span>
-            </div>
+
+            <Link to="/paypal">
+              <div className="button pay-btn">
+                <span>Pay Now</span>
+              </div>
+            </Link>
           </div>
         </div>
       </div>
